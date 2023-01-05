@@ -1,7 +1,7 @@
 <template>
     <div class="list">
     <article v-for="(pokemon, index) in pokemons" :key="'poke'+index" @click="setPokemonUrl(pokemon['url'])">
-      <h3>#{{pokemon['id'] + " " + pokemon['name'] }}</h3>
+      <h3 @click="closeDetail">#{{pokemon['id'] + " " + pokemon['name'] }}</h3>
     </article>
     <div id="scroll-trigger" ref="infinitescrolltrigger">
       <img class="loading-spinner" src="../assets/loading-spinner-white.gif">
@@ -54,6 +54,9 @@ export default {
     next() {
       this.currentUrl = this.nextUrl;
       this.fetchData();
+    },
+    closeDetail() {
+      this.$emit('closeDetail');
     },
     setPokemonUrl(url: any) {
       this.$emit('setPokemonUrl', url);
